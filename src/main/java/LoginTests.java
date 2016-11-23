@@ -30,6 +30,7 @@ public class LoginTests {
         String expectedTitle = "Players1";
 
         assertText(actualTitle, expectedTitle); // Make assertions
+        driver.close();
         driver.quit(); // Close Browser
 
     }
