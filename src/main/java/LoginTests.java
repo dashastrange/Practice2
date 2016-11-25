@@ -62,6 +62,7 @@ public class LoginTests {
 
         assertText(actualTitle, expectedTitle);
 
+//TODO  Find and assert
         WebElement searchInput = driver.findElement(By.xpath("//*[contains(@name, 'login') and not(@class)]"));
         searchInput.sendKeys(loginName);
 
@@ -97,8 +98,69 @@ public class LoginTests {
         String expectedPhoneValue = "5553335353";
         assertValue(actualPhoneValue, expectedPhoneValue);
 
-        /*driver.close();
-        driver.quit(); // Close Browser*/
+        //TODO Change and save
+        String for_email = generateRandomString(5),
+               new_email = for_email + "@gmail.com",
+               new_fname = "F Name",
+               new_lname = "L Nmae",
+               new_city = "NY",
+               new_phone = "12345678";
+
+
+        WebElement emailChange = driver.findElement(By.xpath("//*[contains(@name, 'email')]"));
+        emailChange.clear();
+        emailChange.sendKeys(new_email);
+
+        WebElement FNameChange = driver.findElement(By.xpath("//*[contains(@name, 'fname')]"));
+        FNameChange.clear();
+        FNameChange.sendKeys(new_fname);
+
+        WebElement LNameChange = driver.findElement(By.xpath("//*[contains(@name, 'lname')]"));
+        LNameChange.clear();
+        LNameChange.sendKeys(new_lname);
+
+        WebElement cityChange = driver.findElement(By.xpath("//*[contains(@name, 'city')]"));
+        cityChange.clear();
+        cityChange.sendKeys(new_city);
+
+        WebElement phoneChange = driver.findElement(By.xpath("//*[contains(@name, 'phone')]"));
+        phoneChange.clear();
+        phoneChange.sendKeys(new_phone);
+
+        WebElement saveAgainButton = driver.findElement(By.name("button_save"));
+        saveAgainButton.click();
+
+        WebElement editAgainButton = driver.findElement(By.xpath("//tr[last()]/td[1]/a"));
+        editAgainButton.click();
+
+        //TODO Changes is saved last time
+        WebElement email_assert_Field = driver.findElement(By.xpath("//*[contains(@name, 'email')]"));
+        String actualValue2 = email_assert_Field.getAttribute("value");
+        String expectedValue2 = new_email;
+        assertValue(actualValue2, expectedValue2);
+
+        WebElement fname_assert_Field = driver.findElement(By.xpath("//*[contains(@name, 'fname')]"));
+        String actualFNameValue2 = fname_assert_Field.getAttribute("value");
+        String expectedFNameValue2 = new_fname;
+        assertValue(actualFNameValue2, expectedFNameValue2);
+
+        WebElement lname_assert_Field = driver.findElement(By.xpath("//*[contains(@name, 'lname')]"));
+        String actualLNameValue2 = lname_assert_Field.getAttribute("value");
+        String expectedLNameValue2 = new_lname;
+        assertValue(actualLNameValue2, expectedLNameValue2);
+
+        WebElement city_assert_Field = driver.findElement(By.xpath("//*[contains(@name, 'city')]"));
+        String actualCityValue2 = city_assert_Field.getAttribute("value");
+        String expectedCityValue2 = new_city;
+        assertValue(actualCityValue2, expectedCityValue2);
+
+        WebElement phone_assert_Field = driver.findElement(By.xpath("//*[contains(@name, 'phone')]"));
+        String actualPhoneValue2 = phone_assert_Field.getAttribute("value");
+        String expectedPhoneValue2 = new_phone;
+        assertValue(actualPhoneValue2, expectedPhoneValue2);
+
+        driver.close();
+        driver.quit(); // Close Browser
 
     }
 
