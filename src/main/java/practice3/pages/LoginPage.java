@@ -4,9 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-/**
- * Created by Serhii on 30-Nov-16.
- */
 public class LoginPage {
 
     private WebDriver driver;
@@ -48,6 +45,18 @@ public class LoginPage {
         WebElement errorMsgElement = driver.findElement(By.xpath("//ul[@class='errors']/li"));
         String errorMsg = errorMsgElement.getText();
         return errorMsg;
-//        return driver.findElement(By.xpath("//ul[@class='errors']/li")).getText();
     }
+
+    public String getErrorMessageUsername() {
+        WebElement errorMsgElement = driver.findElement(By.xpath("//dd[@id='username-element']/ul/li"));
+        String errorMsg = errorMsgElement.getText();
+        return errorMsg;
+    }
+
+    public String getErrorMessagePassword() {
+        WebElement errorMsgElement = driver.findElement(By.xpath("//dd[@id='password-element']/ul/li"));
+        String errorMsg = errorMsgElement.getText();
+        return errorMsg;
+    }
+
 }

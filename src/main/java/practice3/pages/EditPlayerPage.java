@@ -1,10 +1,19 @@
 package practice3.pages;
 
-/**
- * Created by Serhii on 30-Nov-16.
- */
+import org.openqa.selenium.WebDriver;
+
 public class EditPlayerPage {
 
-    //TODO Implement this class
+    private WebDriver driver;
+    private InsertPage insertPage;
+
+    public static final String URL = "http://80.92.229.236:81/players";
+
+    public EditPlayerPage(WebDriver driver) {
+        this.driver = driver;
+    }
+
+    public void open() { driver.get(URL); }
+
 
 }
