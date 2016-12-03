@@ -2,6 +2,7 @@ package practice3.tests;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -11,14 +12,13 @@ import practice3.pages.PlayersPage;
 import java.util.concurrent.TimeUnit;
 
 public class PLayersPageTest {
-    WebDriver driver;
-    LoginPage loginPage;
-    PlayersPage playersPage;
+    private WebDriver driver;
+    private PlayersPage playersPage;
 
     @BeforeTest
     public void beforeTest() {
         driver = new FirefoxDriver();
-        loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(driver);
         driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         loginPage.open();
@@ -27,8 +27,14 @@ public class PLayersPageTest {
         driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         playersPage.open();
+        Assert.assertEquals(driver.getTitle(), "Players", "Wrong title after unsuccessful login");
     }
 
+    /**
+     * 1. Fill login field in search panel
+     * 2. Click Reset
+     * 3. Verify that all fields became blank
+     */
     @Test
     public void resetSearch() {
         playersPage.fillFieldsForReset();
@@ -36,9 +42,104 @@ public class PLayersPageTest {
         playersPage.assertIsFieldsEmpty();
     }
 
+    /**
+     * 1. Fill Email field in search panel
+     * 2. Click Search
+     * 3. Verify that list of players not empty
+     */
+    @Test
+    public void searchByEmailTest() {
+        playersPage.fillFieldsForSearchEmail();
+        playersPage.clickOnSearch();
+        playersPage.assertIsPlayerListNotEmpty();
+    }
+
+    /**
+     * 1. Fill City field in search panel
+     * 2. Click Search
+     * 3. Verify that list of players not empty
+     */
+    @Test
+    public void searchByCity() {
+        playersPage.fillFieldsForSearchCity();
+        playersPage.clickOnSearch();
+        playersPage.assertIsPlayerListNotEmpty();
+    }
+
+    /**
+     * 1. Fill RegDate (from) field in search panel
+     * 2. Click Search
+     * 3. Verify that list of players not empty
+     */
+    @Test
+    public void searchByRegDateFrom(){
+        playersPage.fillFieldsForRegDateFrom();
+        playersPage.clickOnSearch();
+        playersPage.assertIsPlayerListNotEmpty();
+    }
+
+    /**
+     * 1. Fill RegDate (till) field in search panel
+     * 2. Click Search
+     * 3. Verify that list of players not empty
+     */
+    @Test
+    public void searchByRegDateTo() {
+        playersPage.fillFieldsForRegDateTo();
+        playersPage.clickOnSearch();
+        playersPage.assertIsPlayerListNotEmpty();
+    }
+
+    /**
+     * 1. Fill First Name field in search panel
+     * 2. Click Search
+     * 3. Verify that list of players not empty
+     */
+    @Test
+    public void searchByFNme(){
+        playersPage.fillFieldsForSearchFName();
+        playersPage.clickOnSearch();
+        playersPage.assertIsPlayerListNotEmpty();
+    }
+
+    /**
+     * 1. Fill Last Name field in search panel
+     * 2. Click Search
+     * 3. Verify that list of players not empty
+     */
+    @Test
+    public void searchByLName() {
+        playersPage.fillFieldsForSearchLName();
+        playersPage.clickOnSearch();
+        playersPage.assertIsPlayerListNotEmpty();
+    }
+
+    /**
+     * 1. Fill Last Login field in search panel
+     * 2. Click Search
+     * 3. Verify that list of players not empty
+     */
+    @Test
+    public void searchByLastLogin() {
+        playersPage.fillFieldsForSearchLastLogin();
+        playersPage.clickOnSearch();
+        playersPage.assertIsPlayerListNotEmpty();
+    }
+
+    /**
+     * 1. Fill MAC Address field in search panel
+     * 2. Click Search
+     * 3. Verify that list of players not empty
+     */
+    @Test
+    public void searchByMacAddr(){
+        playersPage.fillFieldsForSearchByMac();
+        playersPage.clickOnSearch();
+        playersPage.assertIsPlayerListNotEmpty();
+    }
+
     @AfterTest
     public void afterTest() {
-        //close browser
         driver.quit();
     }
 

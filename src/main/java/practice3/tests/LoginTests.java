@@ -14,12 +14,12 @@ import java.util.concurrent.TimeUnit;
 
 public class LoginTests {
 
-    WebDriver driver;
-    LoginPage loginPage;
+    private WebDriver driver;
+    private LoginPage loginPage;
 
     @BeforeTest
     public void beforeTest() {
-        driver = new FirefoxDriver(); //initialize/create object/open firefox
+        driver = new FirefoxDriver();
         driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
@@ -27,9 +27,16 @@ public class LoginTests {
     @BeforeMethod
     public void beforeMethod() {
         loginPage = new LoginPage(driver);
-        loginPage.open(); //open poker URL
+        loginPage.open();
     }
 
+    /**
+     * 1. Enter username admin in the Username field
+     * 2. Enter password 123 in the Password field
+     * 3. Click Log In
+     * 4. Verify that title of the page is Players
+     * 5. Verify that Ulr not equals to the login page Url
+     */
     @Test
     public void positiveTest() {
         loginPage.setUsername("admin");
@@ -39,8 +46,16 @@ public class LoginTests {
         Assert.assertNotEquals(driver.getCurrentUrl(), LoginPage.URL, "You are still on login page.");
     }
 
+    /**
+     * 1. Enter username admin in the Username field
+     * 2. Enter password 123123 in the Password field
+     * 3. Click Log In
+     * 4. Check if your login was successful and you go to next page
+     * 5. Verify that you still on the Login page after login
+     * 6. Verify that you get right error message
+     */
     @Test
-    public void negativeTestWrongPasssord() {
+    public void negativeTestWrongPassword() {
         loginPage.login("admin", "123123");
         loginPage.clickOnLogin();
         String expectedMsg = "Invalid username or password";
@@ -50,7 +65,14 @@ public class LoginTests {
         Assert.assertEquals(actualMsg, expectedMsg, "Validation error message is not valid.");
     }
 
-
+    /**
+     * 1. Enter username admin123 in the Username field
+     * 2. Enter password 123 in the Password field
+     * 3. Click Log In
+     * 4. Check if your login was successful and you go to next page
+     * 5. Verify that you still on the Login page after login
+     * 6. Verify that you get right error message
+     */
     @Test
     public void negativeTestWrongLogin() {
         loginPage.login("admin123", "123");
@@ -62,9 +84,15 @@ public class LoginTests {
         Assert.assertEquals(actualMsg, expectedMsg, "Validation error message is not valid.");
     }
 
+    /**
+     * 1. Click Log In
+     * 4. Check if your login was successful and you go to next page
+     * 5. Verify that you still on the Login page after login
+     * 6. Verify that you get right error message
+     */
     @Test
     public void negativeTestEmptyFields() {
-        loginPage.login("admin123", "123");
+        loginPage.login("", "");
         loginPage.clickOnLogin();
         String expectedMsg = "Value is required and can't be empty";
         String actualMsg = loginPage.getErrorMessage();
@@ -73,6 +101,13 @@ public class LoginTests {
         Assert.assertEquals(actualMsg, expectedMsg, "Validation error message is not valid.");
     }
 
+    /**
+     * 1. Enter password 123 in the Password field
+     * 2. Click Log In
+     * 3. Check if your login was successful and you go to next page
+     * 4. Verify that you still on the Login page after login
+     * 5. Verify that you get right error message
+     */
     @Test
     public void negativeTestEmptyLoginField() {
         loginPage.login("", "123");
@@ -84,6 +119,13 @@ public class LoginTests {
         Assert.assertEquals(actualMsg, expectedMsg, "Validation error message is not valid.");
     }
 
+    /**
+     * 1. Enter username admin in the Username field
+     * 2. Click Log In
+     * 3. Check if your login was successful and you go to next page
+     * 4. Verify that you still on the Login page after login
+     * 5. Verify that you get right error message
+     */
     @Test
     public void negativeTestEmptyPassField() {
         loginPage.login("admin", "");
@@ -97,7 +139,6 @@ public class LoginTests {
 
     @AfterTest
     public void afterTest() {
-        //close browser
         driver.quit();
     }
 

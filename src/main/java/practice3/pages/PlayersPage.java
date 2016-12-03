@@ -5,16 +5,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
-import static practice2.PokerPlayer.generateRandomString;
-
 public class PlayersPage {
-    public static final String URL_PLAYERS = "http://80.92.229.236:81/players";
+    private static final String URL_PLAYERS = "http://80.92.229.236:81/players";
 
     private WebDriver driver;
-    private InsertPage insertPage;
-
-    private String  loginName = "dasha" + generateRandomString(5);
-    private String email = loginName + "@gmail.com";
 
     public PlayersPage(WebDriver driver) {
         this.driver = driver;
@@ -29,7 +23,7 @@ public class PlayersPage {
         resetButton.click();
     }
 
-    public void assertIsFieldsEmpty () {
+    public void assertIsFieldsEmpty() {
         Assert.assertEquals(driver.findElement(By.xpath("//*[contains(@name, 'login') and not(@class)]")).getText(), "", "Field is not empty");
         Assert.assertEquals(driver.findElement(By.xpath("//*[contains(@name, 'email')]")).getText(), "", "Field is not empty");
         Assert.assertEquals(driver.findElement(By.xpath("//*[contains(@name, 'city')]")).getText(), "", "Field is not empty");
@@ -42,13 +36,58 @@ public class PlayersPage {
         Assert.assertEquals(driver.findElement(By.xpath("//*[contains(@name, 'last_login')]")).getText(), "", "Field is not empty");
     }
 
+    public void assertIsPlayerListNotEmpty() {
+        Assert.assertEquals(driver.findElement(By.xpath("//td")).isDisplayed(), true);
+    }
+
     public void fillFieldsForReset() {
         WebElement loginField = driver.findElement(By.xpath("//*[contains(@name, 'login') and not(@class)]"));
         loginField.sendKeys("lllooogggiiinnn");
     }
 
+    public void fillFieldsForSearchEmail() {
+        WebElement loginField = driver.findElement(By.xpath("//*[contains(@name, 'email')]"));
+        loginField.sendKeys("test@gmail.com");
+    }
+
+    public void fillFieldsForSearchCity() {
+        WebElement loginField = driver.findElement(By.xpath("//*[contains(@name, 'city')]"));
+        loginField.sendKeys("LA");
+    }
+
+    public void fillFieldsForRegDateFrom() {
+        WebElement loginField = driver.findElement(By.xpath("//*[contains(@name, 'date_from')]"));
+        loginField.sendKeys("4-01-2014");
+    }
+
+    public void fillFieldsForRegDateTo() {
+        WebElement loginField = driver.findElement(By.xpath("//*[contains(@name, 'date_to')]"));
+        loginField.sendKeys("4-11-2014");
+    }
+
+    public void fillFieldsForSearchFName() {
+        WebElement loginField = driver.findElement(By.xpath("//*[contains(@name, 'firstname')]"));
+        loginField.sendKeys("First Name");
+    }
+
+    public void fillFieldsForSearchLName() {
+        WebElement loginField = driver.findElement(By.xpath("//*[contains(@name, 'lastname')]"));
+        loginField.sendKeys("Last Name");
+    }
+
+    public void fillFieldsForSearchLastLogin() {
+        WebElement loginField = driver.findElement(By.xpath("//*[contains(@name, 'last_login')]"));
+        loginField.sendKeys("4-01-2004");
+    }
+
+    public void fillFieldsForSearchByMac() {
+        WebElement loginField = driver.findElement(By.xpath("//*[contains(@name, 'mac')]"));
+        loginField.sendKeys("00:00:00:00");
+    }
+
+
     public void searchPlayer() {
-        WebElement searchInput = driver.findElement(By.xpath("/*//*[contains(@name, 'login') and not(@class)]"));
+        WebElement searchInput = driver.findElement(By.xpath("//*[contains(@name, 'login') and not(@class)]"));
         searchInput.sendKeys("dasha");
     }
 
@@ -67,7 +106,7 @@ public class PlayersPage {
         editButton.click();
     }
 
-    public void clickOnDelete () {
+    public void clickOnDelete() {
         WebElement editButton = driver.findElement(By.xpath("//tr[last()]/td[last()]/a"));
         editButton.click();
     }

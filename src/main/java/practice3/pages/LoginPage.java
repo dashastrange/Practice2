@@ -25,20 +25,20 @@ public class LoginPage {
     }
 
     public void setUsername(String username) {
-        WebElement usernameInput = driver.findElement(By.id("username")); // Find username input
+        WebElement usernameInput = driver.findElement(By.id("username"));
         usernameInput.clear();
-        usernameInput.sendKeys(username); // Set username
+        usernameInput.sendKeys(username);
     }
 
     public void setPassword(String password) {
-        WebElement passwordInput = driver.findElement(By.id("password")); // Find password input
+        WebElement passwordInput = driver.findElement(By.id("password"));
         passwordInput.clear();
-        passwordInput.sendKeys(password); // Set password
+        passwordInput.sendKeys(password);
     }
 
     public void clickOnLogin() {
-        WebElement loginButton = driver.findElement(By.id("logIn")); // Find login button
-        loginButton.click(); // click on LogIn button
+        WebElement loginButton = driver.findElement(By.id("logIn"));
+        loginButton.click();
     }
 
     public String getErrorMessage() {
