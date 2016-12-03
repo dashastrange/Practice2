@@ -8,6 +8,7 @@ import static practice2.PokerPlayer.generateRandomString;
 
 public class InsertPage {
     private WebDriver driver;
+    private PlayersPage playersPage;
 
     public static final String URL_INS = "http://80.92.229.236:81/players/insert";
 
@@ -17,7 +18,7 @@ public class InsertPage {
 
     public void open() { driver.get(URL_INS); }
 
-    String loginName = generateRandomString(5);
+    String loginName =  "dasha" + generateRandomString(5);
     String email = loginName + "@gmail.com";
 
     public void fillFields() {

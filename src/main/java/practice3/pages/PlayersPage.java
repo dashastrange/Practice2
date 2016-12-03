@@ -9,11 +9,12 @@ import static practice2.PokerPlayer.generateRandomString;
 
 public class PlayersPage {
     public static final String URL_PLAYERS = "http://80.92.229.236:81/players";
-    private String  loginName = generateRandomString(5);
-    private String email = loginName + "@gmail.com";
 
     private WebDriver driver;
     private InsertPage insertPage;
+
+    private String  loginName = "dasha" + generateRandomString(5);
+    private String email = loginName + "@gmail.com";
 
     public PlayersPage(WebDriver driver) {
         this.driver = driver;
@@ -48,7 +49,7 @@ public class PlayersPage {
 
     public void searchPlayer() {
         WebElement searchInput = driver.findElement(By.xpath("/*//*[contains(@name, 'login') and not(@class)]"));
-        searchInput.sendKeys(loginName);
+        searchInput.sendKeys("dasha");
     }
 
     public void clickOnInsert() {
@@ -59,5 +60,15 @@ public class PlayersPage {
     public void clickOnSearch() {
         WebElement searchButton = driver.findElement(By.name("search"));
         searchButton.click();
+    }
+
+    public void clickOnEdit() {
+        WebElement editButton = driver.findElement(By.xpath("//tr[last()]/td[1]/a"));
+        editButton.click();
+    }
+
+    public void clickOnDelete () {
+        WebElement editButton = driver.findElement(By.xpath("//tr[last()]/td[last()]/a"));
+        editButton.click();
     }
 }
