@@ -1,4 +1,4 @@
-package practice3.tests;
+package practice4.tests;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -7,7 +7,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import practice3.pages.LoginPage1;
-import practice3.pages.PlayersPage;
+import practice4.pages.PlayersPage;
 
 import java.util.concurrent.TimeUnit;
 

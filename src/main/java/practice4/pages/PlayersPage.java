@@ -1,4 +1,4 @@
-package practice3.pages;
+package practice4.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -24,7 +24,7 @@ public class PlayersPage {
     }
 
     public void assertIsFieldsEmpty() {
-        Assert.assertTrue(driver.findElements(By.xpath(".//tr[not(@id='r_title')]")).size() < 0, "Players list is empty.");
+        Assert.assertFalse(driver.findElements(By.xpath(".//tr[not(@id='r_title')]")).size() == 0, "Players list is empty.");
     }
 
     public void assertIsPlayerListNotEmpty() {

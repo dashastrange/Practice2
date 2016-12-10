@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Poker Suite" verbose="1" >
+    <!-- Comment block -->
+
+    <test name="Login Tests1">
+        <classes>
+            <class name="practice4.tests.LoginTests"/>
+            <class name="practice4.tests.CRUDUserTests"/>
+        </classes>
+    </test>
+
+</suite>

@@ -7,11 +7,12 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import practice3.pages.EditPlayerPage;
 import practice3.pages.InsertPage;
-import practice3.pages.LoginPage;
+import practice3.pages.LoginPage1;
 import practice3.pages.PlayersPage;
 
 import java.util.concurrent.TimeUnit;
@@ -24,15 +25,18 @@ public class CRUDUserTests {
     @BeforeTest
     public void beforeTest() {
         driver = new FirefoxDriver();
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPage1 loginPage = new LoginPage1(driver);
         driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         loginPage.open();
         loginPage.login("admin", "123");
+    }
+
+    @BeforeMethod
+    public void beforeMethod() {
         playersPage = new PlayersPage(driver);
-        driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         playersPage.open();
+        playersPage.clickOnReset();
     }
 
     /**
@@ -46,8 +50,6 @@ public class CRUDUserTests {
     public void createPlayerTest() {
         playersPage.clickOnInsert();
         InsertPage insertPage = new InsertPage(driver);
-        driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         insertPage.open();
         Assert.assertEquals(driver.getTitle(), "Players - Insert", "Wrong title");
         insertPage.fillFields();
@@ -66,10 +68,6 @@ public class CRUDUserTests {
         playersPage.searchPlayer();
         playersPage.clickOnSearch();
         playersPage.clickOnEdit();
-        EditPlayerPage editPlayerPage = new EditPlayerPage(driver);
-        driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        editPlayerPage.assertFields();
     }
 
     /**
@@ -85,8 +83,6 @@ public class CRUDUserTests {
         playersPage.clickOnSearch();
         playersPage.clickOnEdit();
         EditPlayerPage editPlayerPage = new EditPlayerPage(driver);
-        driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         editPlayerPage.setFields();
     }
 
@@ -102,7 +98,7 @@ public class CRUDUserTests {
         playersPage.searchPlayer();
         playersPage.clickOnSearch();
         playersPage.clickOnDelete();
-        WebDriverWait wait = new WebDriverWait(driver, 15, 100);
+        WebDriverWait wait = new WebDriverWait(driver, 5, 100);
         wait.until(ExpectedConditions.alertIsPresent());
         Alert alert = driver.switchTo().alert();
         alert.accept();
@@ -121,8 +117,6 @@ public class CRUDUserTests {
     public void createPlayerWithoutMandatoryFields() {
         playersPage.clickOnInsert();
         InsertPage insertPage = new InsertPage(driver);
-        driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         insertPage.open();
         Assert.assertEquals(driver.getTitle(), "Players - Insert", "Wrong title");
         insertPage.setFieldsExceptMandatory();
