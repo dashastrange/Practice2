@@ -1,5 +1,6 @@
 package practice4.draganddrop;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterTest;
@@ -25,18 +26,16 @@ public class ActionTest {
 
     @Test
     public void dragAndDropTest() {
-        /*todo
-        1. Open page.
-        2. Perform drag and drop.
-        2. Check text and class attribute.
-         */
         actionPage.open();
-        actionPage.switchToFrame();
         actionPage.dragAndDrop();
-        softAssert.assertTrue(actionPage.isDropped(), "Drag and drop failed.");
-        softAssert.assertEquals(actionPage.getTargetText(), "Dropped!", "Wrong text in target.");
-        //actionPage.switchToMainPage();
+        softAssert.assertEquals(driver.switchTo().alert().getText(), "Are you sure that you want to delete?", "Wrong alert message");
+        actionPage.dismissAlert();
+        softAssert.assertFalse(driver.findElements(By.xpath("//*[@id='sortable']")).size() == 7, "Element deleted");
+        actionPage.dragAndDrop();
+        actionPage.acceptAlert();
+        softAssert.assertFalse(driver.findElements(By.xpath("//*[@id='sortable']")).size() == 6, "Element not deleted");
         softAssert.assertAll();
+        actionPage.switchToMainPage();
     }
 
     @AfterTest

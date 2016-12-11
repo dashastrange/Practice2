@@ -24,11 +24,11 @@ public class PlayersPage {
     }
 
     public void assertIsFieldsEmpty() {
-        Assert.assertFalse(driver.findElements(By.xpath(".//tr[not(@id='r_title')]")).size() == 0, "Players list is empty.");
+        Assert.assertFalse(driver.findElements(By.xpath("//tr[not(@id='r_title')]")).size() == 0, "Players list is empty.");
     }
 
     public void assertIsPlayerListNotEmpty() {
-        Assert.assertTrue(driver.findElements(By.xpath(".//tr[not(@id='r_title')]")).size() > 0, "Players list is not empty.");
+        Assert.assertTrue(driver.findElements(By.xpath("//tr[not(@id='r_title')]")).size() > 0, "Players list is not empty.");
     }
 
     public void fillFieldsForReset() {
