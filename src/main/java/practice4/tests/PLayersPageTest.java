@@ -2,10 +2,7 @@ package practice4.tests;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import practice3.pages.LoginPage1;
 import practice4.pages.PlayersPage;
 
@@ -15,7 +12,7 @@ public class PLayersPageTest {
     private WebDriver driver;
     private PlayersPage playersPage;
 
-    @BeforeTest
+    @BeforeSuite
     public void beforeTest() {
         driver = new FirefoxDriver();
         LoginPage1 loginPage = new LoginPage1(driver);
@@ -140,7 +137,7 @@ public class PLayersPageTest {
         playersPage.assertIsPlayerListNotEmpty();
     }
 
-    @AfterTest
+    @AfterSuite
     public void afterTest() {
         driver.quit();
     }

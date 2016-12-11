@@ -9,9 +9,6 @@ import org.testng.asserts.SoftAssert;
 
 import java.util.concurrent.TimeUnit;
 
-/**
- * Created by Serhii on 07-Dec-16.
- */
 public class ActionTest {
 
     private WebDriver driver;

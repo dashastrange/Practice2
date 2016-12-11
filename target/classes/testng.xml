@@ -2,12 +2,33 @@
 <suite name="Poker Suite" verbose="1" >
     <!-- Comment block -->
 
-    <test name="Login Tests1">
+    <test name="Login Tests">
+        <groups>
+            <dependencies>
+                <group name="low" depends-on="high" />
+            </dependencies>
+        </groups>
         <classes>
             <class name="practice4.tests.LoginTests"/>
+        </classes>
+    </test>
+
+    <test name="CRUD Tests">
+        <groups>
+            <dependencies>
+                <group name="medium" depends-on="high" />
+            </dependencies>
+        </groups>
+        <classes>
             <class name="practice4.tests.CRUDUserTests"/>
+        </classes>
+    </test>
+
+    <test name="Players Page Tests">
+        <classes>
             <class name="practice4.tests.PLayersPageTest"/>
         </classes>
     </test>
+
 
 </suite>

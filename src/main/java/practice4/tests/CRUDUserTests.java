@@ -19,12 +19,11 @@ import static practice2.PokerPlayer.generateRandomString;
 public class CRUDUserTests {
 
     private WebDriver driver;
-    private PlayersPage playersPage;
 
     private String loginName =  "dasha" + generateRandomString(5);
     private String email = loginName + "@gmail.com";
 
-    @BeforeTest
+    @BeforeSuite
     public void beforeTest() {
         driver = new FirefoxDriver();
         LoginPage loginPage = new LoginPage(driver);
@@ -34,13 +33,6 @@ public class CRUDUserTests {
         loginPage.login("admin", "123");
     }
 
-    @BeforeMethod
-    public void beforeMethod() {
-        /*playersPage = new PlayersPage(driver);
-        playersPage.open();*/
-        playersPage.clickOnReset();
-    }
-
     @DataProvider
     public Object[][] createData() {
         return new Object[][] {
@@ -48,8 +40,9 @@ public class CRUDUserTests {
         };
     }
 
-    @Test(dataProvider = "createData")
+    @Test(dataProvider = "createData", groups = "high")
     public void createPlayerTest(String login, String email, String pass, String conf_pass, String fname, String lname, String city, String phone) {
+        PlayersPage playersPage = new PlayersPage(driver);
         playersPage.clickOnInsert();
         InsertPage insertPage = new InsertPage(driver);
         insertPage.open();
@@ -72,8 +65,11 @@ public class CRUDUserTests {
         };
     }
 
-    @Test(dataProvider = "editData")
+    @Test(dataProvider = "editData", groups = "medium")
     public void editFields(String email, String fname, String lname, String city, String phone) {
+        PlayersPage playersPage = new PlayersPage(driver);
+        playersPage.open();
+        playersPage.clickOnReset();
         playersPage.searchPlayer();
         playersPage.clickOnSearch();
         playersPage.clickOnEdit();
@@ -85,8 +81,10 @@ public class CRUDUserTests {
         editPlayerPage.fillPhone(phone);
     }
 
-    @Test
+    @Test(groups = "high")
     public void deletePlayer() {
+        PlayersPage playersPage = new PlayersPage(driver);
+        playersPage.open();
         playersPage.searchPlayer();
         playersPage.clickOnSearch();
         playersPage.clickOnDelete();
@@ -107,8 +105,9 @@ public class CRUDUserTests {
         };
     }
 
-    @Test(dataProvider = "createWithoutMandatoryData")
+    @Test(dataProvider = "createWithoutMandatoryData", groups = "medium")
     public void createPlayerWithoutMandatoryFields(String fname, String lname, String city, String phone, String expectedMsg) {
+        PlayersPage playersPage = new PlayersPage(driver);
         playersPage.clickOnInsert();
         InsertPage insertPage = new InsertPage(driver);
         insertPage.open();
@@ -122,7 +121,7 @@ public class CRUDUserTests {
         Assert.assertEquals(actualMsg, expectedMsg, "Validation error message is not valid.");
     }
 
-    @AfterTest
+    @AfterSuite
     public void afterTest() {
         driver.quit();
     }

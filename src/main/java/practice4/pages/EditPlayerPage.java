@@ -1,12 +1,28 @@
 package practice4.pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 import static practice2.PokerPlayer.generateRandomString;
 
 public class EditPlayerPage {
+
+    @FindBy(xpath = "//*[contains(@name, 'email')]")
+    private WebElement emailChange;
+
+    @FindBy(xpath = "//*[contains(@name, 'fname')]")
+    private WebElement fNameChange;
+
+    @FindBy(xpath = "//*[contains(@name, 'lname')]")
+    private WebElement lNameChange;
+
+    @FindBy(xpath = "//*[contains(@name, 'city')]")
+    private WebElement cityChange;
+
+    @FindBy(xpath = "//*[contains(@name, 'phone')]")
+    private WebElement phoneChange;
 
     private WebDriver driver;
 
@@ -15,36 +31,32 @@ public class EditPlayerPage {
 
     public EditPlayerPage(WebDriver driver) {
         this.driver = driver;
+        PageFactory.initElements(driver, this);
     }
 
     public  void fillEmail(String email) {
-        WebElement emailChange = driver.findElement(By.xpath("//*[contains(@name, 'email')]"));
         emailChange.clear();
         emailChange.sendKeys(new_email);
     }
 
     public  void fillFName(String fname) {
-        WebElement FNameChange = driver.findElement(By.xpath("//*[contains(@name, 'fname')]"));
-        FNameChange.clear();
-        FNameChange.sendKeys(fname);
+        fNameChange.clear();
+        fNameChange.sendKeys(fname);
     }
 
     public  void fillLName(String lname) {
-        WebElement FNameChange = driver.findElement(By.xpath("//*[contains(@name, 'lname')]"));
-        FNameChange.clear();
-        FNameChange.sendKeys(lname);
+        lNameChange.clear();
+        lNameChange.sendKeys(lname);
     }
 
     public  void fillCity(String city) {
-        WebElement FNameChange = driver.findElement(By.xpath("//*[contains(@name, 'city')]"));
-        FNameChange.clear();
-        FNameChange.sendKeys(city);
+        cityChange.clear();
+        cityChange.sendKeys(city);
     }
 
     public  void fillPhone(String phone) {
-        WebElement FNameChange = driver.findElement(By.xpath("//*[contains(@name, 'phone')]"));
-        FNameChange.clear();
-        FNameChange.sendKeys(phone);
+        phoneChange.clear();
+        phoneChange.sendKeys(phone);
     }
 
 }
